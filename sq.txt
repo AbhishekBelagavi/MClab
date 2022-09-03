@@ -1,4 +1,4 @@
-// program to generate square wave with DAC interface
+
 
 #include <lpc21xx.h>
 unsigned int var;
@@ -6,8 +6,8 @@ void delay(void);
 
 int main ()
 {
-	PINSEL0 = 0x00000000 ;						// Configure P0.0 to P0.15 as GPIO
-	PINSEL1 = 0x00000000 ;						// Configure P0.16 to P0.31 as GPIO
+	PINSEL0 = 0x00000000 ;						
+	PINSEL1 = 0x00000000 ;						
 	IO0DIR  = 0x00FF0000 ;
    
 	while(1)
