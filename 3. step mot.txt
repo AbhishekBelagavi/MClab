@@ -1,11 +1,4 @@
-/*************************************************************************
- * Stepper motor Direction control
- * Developed by
- * Advanced Electronics Systems. Bengaluru.
- *------------------------------------------------------------------------
- * A stepper motor direction is controlled by shifting the voltage across 
- * the coils. Port lines : P0.12 to P0.15
- *************************************************************************/
+
 
  #include <LPC21xx.H>
 
@@ -17,52 +10,51 @@
 
  int main(void)
  {
-	PINSEL0 = 0x00FFFFFF;		//P0.12 to P0.15 GPIo
-	IO0DIR |= 0x0000F000;		//P0.12 to P0.15 output
-
+	PINSEL0 = 0x00FFFFFF;		
+	IO0DIR |= 0x0000F000;		
 	while(1)
 	{
-		for(j=0;j<50;j++)       // 20 times in Clock wise Rotation
+		for(j=0;j<50;j++)       
 			clock_wise();
 		
-		for(k=0;k<65000;k++);   // Delay to show  anti_clock Rotation 
+		for(k=0;k<65000;k++);   
 		
-		for(j=0;j<50;j++)       // 20 times in  Anti Clock wise Rotation
+		for(j=0;j<50;j++)       
 			anti_clock_wise();
 
-		for(k=0;k<65000;k++);   // Delay to show clock Rotation 
+		for(k=0;k<65000;k++);   
 
-	} 							// End of while(1)
+	} 							
 
- } 								// End of main
+ } 								
 
  void clock_wise(void)
  {
-	var1 = 0x00000800;         	//For Clockwise
-    for(i=0;i<=3;i++)         	// for A B C D Stepping
+	var1 = 0x00000800;         	
+    for(i=0;i<=3;i++)         	
 	{
-		var1 = var1<<1;        	//For Clockwise
+		var1 = var1<<1;        	
         var2 = ~var1;
         var2 = var2 & 0x0000F000;
 
 		IO0PIN = ~var2;
 		
-        for(k=0;k<3000;k++); 	//for step speed variation         
+        for(k=0;k<3000;k++); 	       
       }
 
  }
 
  void anti_clock_wise(void)
  {
-	var1 = 0x00010000;      	//For Anticlockwise
-     for(i=0;i<=3;i++)      	// for A B C D Stepping
+	var1 = 0x00010000;      	
+     for(i=0;i<=3;i++)      	
       {
-        var1 = var1>>1;     	//For Anticlockwise
+        var1 = var1>>1;     	
         var2 = ~var1;
         var2 = var2 & 0x0000F000;
 
 		IO0PIN = ~var2;
-        for(k=0;k<3000;k++); 	//for step speed variation 
+        for(k=0;k<3000;k++); 	
              
       }
  }
